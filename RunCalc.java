@@ -1,10 +1,12 @@
 package calc2;
 
 
+import calc2.exceptions.LimitExecption;
 import calc2.exceptions.MathematicalOperatorNotFoundException;
 import calc2.exceptions.MyRuntimeException;
 import calc2.exceptions.OperandMismatchException;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class RunCalc {
@@ -16,11 +18,11 @@ public class RunCalc {
         Calculator calculator = new Calculator();
 
         System.out.println("""
-                Калькулятор римских либо арабских чисел
+                Калькулятор римских либо арабских чисел от 1 до 10
                 цифры должны соответствовать друг другу
                 пример ввода
-                XXX - XX
-                30 - 60
+                X - V
+                10 - 5
                 Для выхода набрать ВЫХОД
                 """);
 
@@ -55,10 +57,12 @@ public class RunCalc {
                 if (arabianOrRomanOperands.equals("roman")) {
 
                     calculator.initRomanNumbers(input);
+                    limitNumberOfTen(calculator.getRomanA(), calculator.getRomanB());
                     System.out.println("= " + Converter.arabicToRoman(calculator.getRes()));
                 } else if (arabianOrRomanOperands.equals("arabian")) {
 
                     calculator.initArabicNumbers(input);
+                    limitNumberOfTen(calculator.getArabicA(), calculator.getArabicB());
                     calculator.calculateAMathematicalExpression();
                     System.out.println("= " + calculator.getRes());
                 } else {
@@ -73,4 +77,19 @@ public class RunCalc {
             }
         }
     }
+
+    private static void limitNumberOfTen(int a, int b){
+        if (a < 1 || a > 10 || b < 1 || b > 10){
+            throw new LimitExecption("Числа должны быть от 1 до 10");
+        }
+    }
+
+    private static void limitNumberOfTen(String a, String b){
+        String[] roman = {"I", "II", "III", "IV", "V", "VI", "VII", "VIII","IX", "X"};
+        if(!Arrays.asList(roman).contains(a) || !Arrays.asList(roman).contains(b) ){
+            throw new LimitExecption("Числа должны быть от I до X");
+        }
+
+    }
+
 }

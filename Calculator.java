@@ -14,6 +14,22 @@ public class Calculator {
     private String operation;
     private int res;
 
+    public int getArabicA() {
+        return arabicA;
+    }
+
+    public int getArabicB() {
+        return arabicB;
+    }
+
+    public String getRomanA() {
+        return romanA;
+    }
+
+    public String getRomanB() {
+        return romanB;
+    }
+
     int getRes(){
         return res;
     }
